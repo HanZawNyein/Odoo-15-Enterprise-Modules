@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding='utf-8' ?>
+<odoo>
+    <record id="view_hospital_appointment_tree" model="ir.ui.view">
+        <field name="name">hospital.appointment.tree</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <tree delete="0" decoration-success="state == 'done'" decoration-danger="state == 'cancel'" decoration-info="state in ('draft','in_consultation')">
+                <field name="patient_id"/>
+                <field name="ref"/>
+                <field name="gender" optional="show"/>
+                <field name="booking_date" optional="show"/>
+                <field name="appointment_time" optional="hide"/>
+                <field name="activity_ids" widget="list_activity" optional="hide"/>
+                <field name="state" widget="badge" decoration-danger="state == 'cancel'"
+                decoration-success="state == 'done'" decoration-info="state in ('draft','in_consultation')"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hospital_appointment_form" model="ir.ui.view">
+        <field name="name">hospital.appointment.form</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <form create="0" copy="0">
+                <header>
+                    <field name="state" widget="statusbar" nolabel="1" options="{'clickable':1}"
+                           statusbar_visible="draft,in_consultation,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="priority" widget="priority" class="mr-3"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="ref"/>
+                            <field name="gender"/>
+                            <field name="booking_date"/>
+                        </group>
+                        <group>
+                            <field name="appointment_time"/>
+                            <button name="action_testing" type="object" string="Object Button"/>
+                            <button name="%(om_hospital.action_hospital_patient)d"
+                                    confirm="Are you sure to open patient action ?"
+                                    help="dedirect to patient page"
+                                    string="Test Button" class="oe_highlight" type="action"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Prescription" name="prescription">
+                            <group>
+                                <field name="prescription" placeholder="Enter Your Prescription"/>
+                            </group>
+                        </page>
+                        <page string="Pharmacy" name="pharmacy">
+                            <group>
+                                <field name="booking_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                    <field name="activity_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hospital_appointment" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Appointment!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_appointment"
+              name="Appointments"
+              sequence="10"
+              action="action_hospital_appointment"
+              parent="menu_appointment_master"/>
+</odoo>

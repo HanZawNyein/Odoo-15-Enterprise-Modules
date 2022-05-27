@@ -5,7 +5,7 @@ class HospitalAppointment(models.Model):
     _name = "hospital.appointment"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Hospital Appointment"
-    _rec_name = 'patient_id'
+    _rec_name = 'appointment_time'
 
     patient_id = fields.Many2one(comodel_name='hospital.patient', string="Patient")
     gender = fields.Selection(related='patient_id.gender', readonly=False)
@@ -23,6 +23,7 @@ class HospitalAppointment(models.Model):
         ('in_consultation', 'In Consultation'),
         ('done', 'Done'),
         ('cancel', 'Cancelled')], default='draft', string="Status", required=True)
+    doctor_id = fields.Many2one('res.users',string='Doctor')
 
     @api.onchange('patient_id')
     def onchange_patient_id(self):

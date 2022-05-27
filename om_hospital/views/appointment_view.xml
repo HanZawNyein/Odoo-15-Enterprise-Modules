@@ -8,6 +8,7 @@
                 <field name="patient_id"/>
                 <field name="ref"/>
                 <field name="gender" optional="show"/>
+                <field name="doctor_id" widget="many2one_avatar_user" optional="show"/>
                 <field name="booking_date" optional="show"/>
                 <field name="appointment_time" optional="hide"/>
                 <field name="activity_ids" widget="list_activity" optional="hide"/>
@@ -37,6 +38,7 @@
                             <field name="patient_id"/>
                             <field name="ref"/>
                             <field name="gender"/>
+                            <field name="doctor_id" widget="many2one_avatar_user"/>
                             <field name="booking_date"/>
                         </group>
                         <group>

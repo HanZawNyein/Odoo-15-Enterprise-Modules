@@ -43,7 +43,7 @@
                         </group>
                         <group>
                             <field name="appointment_time"/>
-                            <button name="action_testing" type="object" string="Object Button"/>
+                            <button name="action_testing" type="object" string="Object Button" class="oe_highlight"/>
                             <button name="%(om_hospital.action_hospital_patient)d"
                                     confirm="Are you sure to open patient action ?"
                                     help="dedirect to patient page"
@@ -53,7 +53,8 @@
                     <notebook>
                         <page string="Prescription" name="prescription">
                             <group>
-                                <field name="prescription" placeholder="Enter Your Prescription"/>
+                                <field name="prescription" placeholder="Enter Your Prescription"
+                                options="{'collaborative':true}"/>
                             </group>
                         </page>
                         <page string="Pharmacy" name="pharmacy">

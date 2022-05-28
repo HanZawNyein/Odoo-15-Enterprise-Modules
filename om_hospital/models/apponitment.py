@@ -30,7 +30,7 @@ class HospitalAppointment(models.Model):
         self.ref = self.patient_id.ref
 
     def action_testing(self):
-        print("Button CLicked")
+        # print("Button CLicked")
         return {
             'effect': {
                 'fadeout': 'slow',

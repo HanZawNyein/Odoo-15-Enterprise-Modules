@@ -5,7 +5,7 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <tree delete="0"
-                  sample="1"
+                  sample="1" multi_edit="1"
                   decoration-success="state == 'done'" decoration-danger="state == 'cancel'" decoration-info="state in ('draft','in_consultation')">
                 <field name="patient_id"/>
                 <field name="ref"/>

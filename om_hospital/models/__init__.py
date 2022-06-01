@@ -1,1 +1,1 @@
-from . import patient,apponitment
+from . import patient,apponitment,patient_tag

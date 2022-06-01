@@ -56,12 +56,12 @@
                             <field name="booking_date"/>
                         </group>
                         <group>
-                            <field name="hide_sales_price"/>
+                            <field name="hide_sales_price" groups="base.group_no_one"/>
                             <field name="appointment_time"/>
-                            <button name="action_testing" type="object" string="Object Button" class="oe_highlight"/>
+                            <button name="action_testing" type="object" string="Object Button" class="oe_highlight" groups="base.group_no_one"/>
                             <button name="%(om_hospital.action_hospital_patient)d"
                                     confirm="Are you sure to open patient action ?"
-                                    help="dedirect to patient page"
+                                    help="dedirect to patient page" groups="base.group_no_one"
                                     string="Test Button" class="oe_highlight" type="action"/>
                         </group>
                     </group>

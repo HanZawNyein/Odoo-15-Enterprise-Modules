@@ -35,7 +35,7 @@
                             data-hotkey="v"
                             states="in_consultation" class="oe_highlight"/>
                     <button name="action_cancel" string="Cancel" type="object"
-                             data-hotkey="z"
+                            data-hotkey="z"
                             states="draft,in_consultation"/>
                     <!--                    options="{'clickable':1}"-->
                     <field name="state" widget="statusbar" nolabel="1"
@@ -56,6 +56,7 @@
                             <field name="booking_date"/>
                         </group>
                         <group>
+                            <field name="hide_sales_price"/>
                             <field name="appointment_time"/>
                             <button name="action_testing" type="object" string="Object Button" class="oe_highlight"/>
                             <button name="%(om_hospital.action_hospital_patient)d"
@@ -77,14 +78,14 @@
                                 <field name="pharmacy_line_ids">
                                     <tree editable="top">
                                         <field name="product_id"/>
-                                        <field name="price_unit"/>
+                                        <field name="price_unit" attrs="{'column_invisible':[('parent.hide_sales_price','=',True)]}"/>
                                         <field name="qty"/>
                                     </tree>
                                     <form>
                                         <group>
                                             <field name="product_id"/>
-                                        <field name="price_unit"/>
-                                        <field name="qty"/>
+                                            <field name="price_unit" attrs="{'column_invisible':[('parent.hide_sales_price','=',True)]}"/>
+                                            <field name="qty"/>
                                         </group>
                                     </form>
                                 </field>

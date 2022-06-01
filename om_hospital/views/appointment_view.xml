@@ -91,7 +91,7 @@
                         <page string="Prescription" name="prescription">
                             <group>
                                 <field name="prescription" placeholder="Enter Your Prescription"
-                                       options="{'collaborative':true,'resizable':true}"/>
+                                       options="{'collaborative':true,'resizable':true,'codeview':true}"/>
                             </group>
                         </page>
                         <page string="Pharmacy" name="pharmacy">

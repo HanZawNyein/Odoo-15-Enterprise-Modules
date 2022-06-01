@@ -6,7 +6,8 @@
         <field name="arch" type="xml">
             <tree delete="0"
                   sample="1" multi_edit="1"
-                  decoration-success="state == 'done'" decoration-danger="state == 'cancel'" decoration-info="state in ('draft','in_consultation')">
+                  decoration-success="state == 'done'" decoration-danger="state == 'cancel'"
+                  decoration-info="state in ('draft','in_consultation')">
                 <field name="patient_id"/>
                 <field name="ref"/>
                 <field name="gender" optional="show"/>
@@ -15,7 +16,7 @@
                 <field name="appointment_time" optional="hide"/>
                 <field name="activity_ids" widget="list_activity" optional="hide"/>
                 <field name="state" widget="badge" decoration-danger="state == 'cancel'"
-                decoration-success="state == 'done'" decoration-info="state in ('draft','in_consultation')"/>
+                       decoration-success="state == 'done'" decoration-info="state in ('draft','in_consultation')"/>
             </tree>
         </field>
     </record>
@@ -26,7 +27,16 @@
         <field name="arch" type="xml">
             <form create="0" copy="0">
                 <header>
-                    <field name="state" widget="statusbar" nolabel="1" options="{'clickable':1}"
+                    <button name="action_in_consultation" string="In Consultation" type="object"
+                            states="draft" class="oe_highlight"/>
+                    <button name="action_draft" string="Draft" type="object"
+                            states="cancel"/>
+                    <button name="action_done" string="Mark As Done" type="object"
+                            states="in_consultation" class="oe_highlight"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            states="draft,in_consultation"/>
+                    <!--                    options="{'clickable':1}"-->
+                    <field name="state" widget="statusbar" nolabel="1"
                            statusbar_visible="draft,in_consultation,done"/>
                 </header>
                 <sheet>
@@ -56,7 +66,7 @@
                         <page string="Prescription" name="prescription">
                             <group>
                                 <field name="prescription" placeholder="Enter Your Prescription"
-                                options="{'collaborative':true,'resizable':true}" />
+                                       options="{'collaborative':true,'resizable':true}"/>
                             </group>
                         </page>
                         <page string="Pharmacy" name="pharmacy">

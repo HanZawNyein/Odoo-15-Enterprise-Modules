@@ -28,8 +28,8 @@
                 <field name="gender"/>
                 <filter name="filter_male" string="Male" domain="[('gender','=','male')]"/>
                 <filter name="filter_female" string="Female" domain="[('gender','=','female')]"/>
-<!--                <separator/>-->
-<!--                <filter name="filter_age" string="Kids" domain="[('age','&lt;=','18')]"/>-->
+                <!--                <separator/>-->
+                <!--                <filter name="filter_age" string="Kids" domain="[('age','&lt;=','18')]"/>-->
                 <separator/>
                 <filter name="filter_archived" string="Archive" domain="[('active','=',False)]"/>
                 <filter name="filter_unarchived" string="Unarchive" domain="[('active','=',True)]"/>
@@ -49,6 +49,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="image" class="oe_avatar" widget="image"/>
                     <group>
                         <group>
                             <field name="name"/>

@@ -9,7 +9,9 @@
     Odoo Inheritance System
     """,
     'depends': ['sale'],
-    'data': [],
+    'data': [
+        'views/sale_order_view.xml'
+    ],
     'demo': [],
     'installable': True,
     'application': True,

@@ -4,3 +4,6 @@ om_hospital/wizard/__pycache__/
 
 odoo_controller/__pycache__/
 odoo_controller/controllers/__pycache__/
+
+om_odoo_inheritance/__pycache__/
+om_odoo_inheritance/models/__pycache__/

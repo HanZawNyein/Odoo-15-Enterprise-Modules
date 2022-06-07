@@ -6,6 +6,7 @@ class SaleOrder(models.Model):
 
     confirmed_user_id = fields.Many2one('res.users', string='Confirmed User')
 
+
     def action_confirm(self):
         super(SaleOrder,self).action_confirm()
         self.confirmed_user_id = self.env.user.id

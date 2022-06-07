@@ -17,6 +17,11 @@ class HospitalPatient(models.Model):
     active = fields.Boolean(string='Active', default=True)
     image= fields.Image(string="Image")
     tag_ids = fields.Many2many(comodel_name='patient.tag',string='Tags')
+    
+    @api.model
+    def create(self, vals_list):
+        vals_list['ref'] = 'REF'
+        return super(HospitalPatient, self).create(vals_list)
 
     @api.depends('date_of_birth')
     def _compute_age(self):

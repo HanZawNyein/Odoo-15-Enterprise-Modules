@@ -20,7 +20,7 @@ class HospitalPatient(models.Model):
     
     @api.model
     def create(self, vals_list):
-        vals_list['ref'] = 'REF'
+        vals_list['ref'] = self.env['ir.sequence'].next_by_code('hospital.patient')
         return super(HospitalPatient, self).create(vals_list)
 
     @api.depends('date_of_birth')

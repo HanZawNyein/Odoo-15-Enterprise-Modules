@@ -59,6 +59,8 @@ class HospitalAppointment(models.Model):
         action = self.env.ref('om_hospital.action_cancel_appointment').read()[0]
         return action
 
+
+
 class AppointmentPharmacyLines(models.Model):
     _name = "appointment.pharmacy.lines"
     _description = "Appointment Pharmacy Lines"

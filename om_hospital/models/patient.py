@@ -24,7 +24,7 @@ class HospitalPatient(models.Model):
         return super(HospitalPatient, self).create(vals_list)
 
     def write(self, vals):
-        if not self.ref:#not vals.get('ref'):
+        if not self.ref:  # not vals.get('ref'):
             vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.patient')
         return super(HospitalPatient, self).write(vals)
 
@@ -38,3 +38,12 @@ class HospitalPatient(models.Model):
                 rec.age = 1
         # self.age = today.year - self.date_of_birth.year - (
         #             (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+
+    def name_get(self):
+        # patient_list = []
+        # for record in self:
+        #     name = record.ref +','+ record.name
+        #     patient_list.append((record.id,name))
+        #
+        # return patient_list
+        return [(record.id, "[%s]%s" % (record.ref, record.name)) for record in self]

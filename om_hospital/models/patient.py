@@ -15,13 +15,18 @@ class HospitalPatient(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string='Gender', tracking=True)
     appointment_id = fields.Many2one(comodel_name='hospital.appointment', string="Appointments")
     active = fields.Boolean(string='Active', default=True)
-    image= fields.Image(string="Image")
-    tag_ids = fields.Many2many(comodel_name='patient.tag',string='Tags')
-    
+    image = fields.Image(string="Image")
+    tag_ids = fields.Many2many(comodel_name='patient.tag', string='Tags')
+
     @api.model
     def create(self, vals_list):
         vals_list['ref'] = self.env['ir.sequence'].next_by_code('hospital.patient')
         return super(HospitalPatient, self).create(vals_list)
+
+    def write(self, vals):
+        if not self.ref:#not vals.get('ref'):
+            vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.patient')
+        return super(HospitalPatient, self).write(vals)
 
     @api.depends('date_of_birth')
     def _compute_age(self):

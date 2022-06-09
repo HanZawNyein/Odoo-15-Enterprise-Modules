@@ -24,7 +24,7 @@ class HospitalAppointment(models.Model):
         ('done', 'Done'),
         ('cancel', 'Cancelled')], default='draft', string="Status", required=True)
     doctor_id = fields.Many2one('res.users', string='Doctor', tracking=True)
-    pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines','appointment_id',string='Pharmacy Lines')
+    pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines', 'appointment_id', string='Pharmacy Lines')
     hide_sales_price = fields.Boolean(string='Hide Sale Price')
 
     @api.onchange('patient_id')
@@ -60,12 +60,11 @@ class HospitalAppointment(models.Model):
         return action
 
 
-
 class AppointmentPharmacyLines(models.Model):
     _name = "appointment.pharmacy.lines"
     _description = "Appointment Pharmacy Lines"
 
-    product_id=fields.Many2one('product.product',required=True)
+    product_id = fields.Many2one('product.product', required=True)
     price_unit = fields.Float(related="product_id.list_price")
-    qty = fields.Integer(string="Quantity",default=1)
-    appointment_id = fields.Many2one('hospital.appointment',string='Appointment')
+    qty = fields.Integer(string="Quantity", default=1)
+    appointment_id = fields.Many2one('hospital.appointment', string='Appointment')

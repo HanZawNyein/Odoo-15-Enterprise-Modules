@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding='utf-8' ?>
+<odoo>
+    <record id="action_playground" model="ir.actions.act_window">
+        <field name="name">Play Ground</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">odoo.playground</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="menu_technical" name="Technical" sequence="0" parent="menu_hospital_root">
+        <menuitem id="menu_playground"
+                  name="Play Ground"
+                  sequence="0"
+                  action="action_playground"/>
+    </menuitem>
+
+
+</odoo>

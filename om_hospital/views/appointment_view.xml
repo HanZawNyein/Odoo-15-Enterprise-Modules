@@ -55,12 +55,12 @@
                     <button name="action_done" string="Mark As Done" type="object"
                             data-hotkey="v"
                             states="in_consultation" class="oe_highlight"/>
-<!--                    <button name="%(om_hospital.action_cancel_appointment)d" string="Cancel" type="action"-->
-<!--                            data-hotkey="z"-->
-<!--                            states="draft,in_consultation"/>-->
-                    <button name="action_cancel" string="Cancel" type="object"
-                            data-hotkey="z"
+                    <button name="%(om_hospital.action_cancel_appointment)d" string="Cancel" type="action"
+                            data-hotkey="z" context="{'default_appointment_id':active_id}"
                             states="draft,in_consultation"/>
+<!--                    <button name="action_cancel" string="Cancel" type="object"-->
+<!--                            data-hotkey="z" -->
+<!--                            states="draft,in_consultation"/>-->
                     <!--                    options="{'clickable':1}"-->
                     <field name="state" widget="statusbar" nolabel="1"
                            statusbar_visible="draft,in_consultation,done"/>

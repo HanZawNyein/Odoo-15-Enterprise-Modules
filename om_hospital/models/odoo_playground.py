@@ -6,8 +6,9 @@ class OdooPlayGround(models.Model):
     _name = "odoo.playground"
     _description = "Odoo PlayGround"
 
-    DEFAULT_ENV_VARIABLES = """#Avaiable Variables
-    # - self.Current Object
+    DEFAULT_ENV_VARIABLES = """
+    #Avaiable Variables
+    # - self.env.user.name : current username
     # - self.env: Odoo Environment on which the action is triggered
     """
 

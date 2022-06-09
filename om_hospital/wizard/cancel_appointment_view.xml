@@ -7,7 +7,7 @@
             <form>
                 <group>
                     <group>
-                        <field name="appointment_id"/>
+                        <field name="appointment_id" invisible="1"/>
                         <field name="reason"/>
                     </group>
                     <group>

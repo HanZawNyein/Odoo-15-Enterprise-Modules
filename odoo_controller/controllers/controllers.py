@@ -1,7 +1,7 @@
 import json
 from odoo import http
-from odoo.http import request,rpc_response
-from odoo.http import JsonRequest
+from odoo.http import request, rpc_response
+
 
 class OdooController(http.Controller):
     # test route
@@ -22,13 +22,20 @@ class OdooController(http.Controller):
              "avatar": "https://reqres.in/img/faces/6-image.jpg"}],
                      "support": {"url": "https://reqres.in/#support-heading",
                                  "text": "To keep ReqRes free, contributions towards server costs are appreciated!"}}
+        # """
+        # url : http://localhost:8069/api/info
+        # method : GET
+        # CORS Fixed
+        # """
+        # print(type(data_list), type(json.dumps(data_list)))
         return json.dumps(data_list)
 
 
+#
 class WebsiteSaleController(http.Controller):
-    @http.route(["/shop/checkout/"],type='http',auth='public',website=True,sitemap=False)
-    def checkout(self,**kwargs):
-        order =request.website.sale_get_order()
+    @http.route(["/shop/checkout/"], type='http', auth='public', website=True, sitemap=False)
+    def checkout(self, **kwargs):
+        order = request.website.sale_get_order()
         redirection = self.checkout_redirection(order)
         if redirection:
             return redirection

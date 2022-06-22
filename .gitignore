@@ -1,9 +1,1 @@
-om_hospital/models/__pycache__/
-om_hospital/__pycache__/
-om_hospital/wizard/__pycache__/
-
-odoo_controller/__pycache__/
-odoo_controller/controllers/__pycache__/
-
-om_odoo_inheritance/__pycache__/
-om_odoo_inheritance/models/__pycache__/
+**/__pycache__/**

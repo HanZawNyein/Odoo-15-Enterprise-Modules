@@ -61,8 +61,8 @@ class HospitalAppointment(models.Model):
         return action
 
     def unlink(self):
-        if self.state == 'done':
-            raise ValidationError(_("You cannot delete appointment in status 'Done'."))
+        if self.state != 'draft':
+            raise ValidationError(_("You can delete appointment only in  status 'Draft'."))
         return super(HospitalAppointment,self).unlink()
 
 

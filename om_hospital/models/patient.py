@@ -32,6 +32,12 @@ class HospitalPatient(models.Model):
         for rec in self:
             rec.appointment_count = self.env['hospital.appointment'].search_count([('patient_id', '=', rec.id)])
 
+    @api.ondelete(at_uninstall=False)
+    def _check_appointments(self):
+        for rec in self:
+            if rec.appointment_ids:
+                raise ValidationError(_("Cannot delete a patient with appointments."))
+
     @api.constrains('date_of_birth')
     def _check_date_of_birth(self):
         for rec in self:

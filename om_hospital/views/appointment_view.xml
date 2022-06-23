@@ -42,6 +42,12 @@
                 <field name="activity_ids" widget="list_activity" optional="hide"/>
                 <field name="state" widget="badge" decoration-danger="state == 'cancel'"
                        decoration-success="state == 'done'" decoration-info="state in ('draft','in_consultation')"/>
+                <button name="action_done" class="fa fa-check btn-success rounded-pill"
+                        attrs="{'invisible':[('state','!=','in_consultation')]}" type="object"
+                        states="in_consultation"/>
+                <button name="%(om_hospital.action_cancel_appointment)d" string="Cancel" type="action"
+                        context="{'default_appointment_id':active_id}" class="fa fa-times btn-danger"
+                        attrs="{'invisible':[('state','not in',('draft','in_consultation'))]}"/>
             </tree>
         </field>
     </record>

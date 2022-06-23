@@ -10,7 +10,7 @@
                 <field name="age"/>
                 <field name="gender"/>
                 <field name="date_of_birth"/>
-                <field name="appointment_id"/>
+                <field name="appointment_count"/>
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
             </tree>
         </field>

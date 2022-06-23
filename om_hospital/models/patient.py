@@ -19,13 +19,13 @@ class HospitalPatient(models.Model):
     active = fields.Boolean(string='Active', default=True)
     image = fields.Image(string="Image")
     tag_ids = fields.Many2many(comodel_name='patient.tag', string='Tags')
-    appointment_count = fields.Integer(string="Appointment Count", compute='_compute_appointment_count')
+    appointment_count = fields.Integer(string="Appointment Count", compute='_compute_appointment_count',store=True)
     appointment_ids = fields.One2many('hospital.appointment','patient_id',string="Appointments")
 
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
         for rec in self:
-            rec.appointment_count = self.env['hospital.appointment'].search_count(['patient_id', '=', rec.id])
+            rec.appointment_count = self.env['hospital.appointment'].search_count([('patient_id', '=', rec.id)])
 
     @api.constrains('date_of_birth')
     def _check_date_of_birth(self):

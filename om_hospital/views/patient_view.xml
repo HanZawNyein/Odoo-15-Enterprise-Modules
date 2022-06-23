@@ -55,7 +55,7 @@
                             <field name="name"/>
                             <field name="date_of_birth"/>
                             <field name="age"/>
-<!--                            <field name="appointment_id"/>-->
+                            <!--                            <field name="appointment_id"/>-->
                             <field name="appointment_count"/>
                         </group>
                         <group>
@@ -64,6 +64,11 @@
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
                             <field name="active" invisible="1"/>
                         </group>
+                    </group>
+                    <group string="Other Information">
+                        <field name="parent" attrs="{'invisible':[('age','>',18)]}"/>
+                        <field name="marital_status"/>
+                        <field name="partner_name"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">

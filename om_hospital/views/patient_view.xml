@@ -66,9 +66,9 @@
                         </group>
                     </group>
                     <group string="Other Information">
-                        <field name="parent" attrs="{'invisible':[('age','>',18)]}"/>
-                        <field name="marital_status"/>
-                        <field name="partner_name"/>
+                        <field name="parent" attrs="{'invisible':[('age','>=',18)]}"/>
+                        <field name="marital_status" attrs="{'invisible':[('age','&lt;=',18)]}"/>
+                        <field name="partner_name" attrs="{'readonly':[('marital_status','!=','married')]}"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">

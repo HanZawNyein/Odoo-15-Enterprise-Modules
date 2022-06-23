@@ -29,6 +29,10 @@
                   sample="1" multi_edit="1"
                   decoration-success="state == 'done'" decoration-danger="state == 'cancel'"
                   decoration-info="state in ('draft','in_consultation')">
+                <header>
+                    <button name="action_in_consultation" string="In Consultation" type="object"
+                            class="oe_highlight"/>
+                </header>
                 <field name="patient_id"/>
                 <field name="ref"/>
                 <field name="gender" optional="show"/>
@@ -59,9 +63,9 @@
                             data-hotkey="z" context="{'default_appointment_id':active_id}"
                             states="draft,in_consultation"/>
 
-<!--                    <button name="action_cancel" string="Cancel" type="object"-->
-<!--                            data-hotkey="z" -->
-<!--                            states="draft,in_consultation"/>-->
+                    <!--                    <button name="action_cancel" string="Cancel" type="object"-->
+                    <!--                            data-hotkey="z" -->
+                    <!--                            states="draft,in_consultation"/>-->
                     <!--                    options="{'clickable':1}"-->
                     <field name="state" widget="statusbar" nolabel="1"
                            statusbar_visible="draft,in_consultation,done"/>

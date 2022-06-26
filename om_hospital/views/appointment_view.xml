@@ -50,6 +50,7 @@
                         attrs="{'invisible':[('state','not in',('draft','in_consultation'))]}"/>
                 <groupby name="patient_id">
                     <button name="action_test" string="CLick Me" type="object" class="oe_highlight" />
+                    <button name="edit" string="Edit" type="edit"/>
                 </groupby>
             </tree>
         </field>

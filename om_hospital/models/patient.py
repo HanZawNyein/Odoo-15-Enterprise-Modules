@@ -2,6 +2,7 @@ from odoo import api, fields, models, _
 from datetime import date
 
 from odoo.exceptions import ValidationError
+from dateutil import relativedelta
 
 
 class HospitalPatient(models.Model):
@@ -11,7 +12,7 @@ class HospitalPatient(models.Model):
 
     name = fields.Char(string='Name', tracking=True)
     date_of_birth = fields.Date(string='Date of Birth', )
-    age = fields.Integer(string='Age', compute='_compute_age', tracking=True)
+    age = fields.Integer(string='Age', compute='_compute_age', inverse='_inverse_compute_age', tracking=True)
 
     ref = fields.Char(string="Reference")
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string='Gender', tracking=True)
@@ -64,6 +65,12 @@ class HospitalPatient(models.Model):
                 rec.age = 1
         # self.age = today.year - self.date_of_birth.year - (
         #             (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+
+    @api.depends('age')
+    def _inverse_compute_age(self):
+        today = date.today()
+        for rec in self:
+            rec.date_of_birth = today - relativedelta.relativedelta(years=rec.age)
 
     def name_get(self):
         # patient_list = []

@@ -9,6 +9,7 @@ class HospitalPatient(models.Model):
     _name = "hospital.patient"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Hospital Patient"
+    _order = 'id desc'
 
     name = fields.Char(string='Name', tracking=True)
     date_of_birth = fields.Date(string='Date of Birth', )

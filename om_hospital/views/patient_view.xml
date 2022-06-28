@@ -90,6 +90,11 @@
                         <field name="partner_name"
                                attrs="{'readonly':[('marital_status','!=','married')],'required':[('marital_status','=','married')]}"/>
                     </group>
+                    <group>
+                        <field name="phone" widget="phone"/>
+                        <field name="email" widget="email"/>
+                        <field name="website" widget="url"/>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" groups="base.group_user"/>

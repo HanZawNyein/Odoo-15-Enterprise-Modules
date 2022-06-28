@@ -1,4 +1,4 @@
-from odoo import api, fields, models,_
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -8,7 +8,8 @@ class HospitalAppointment(models.Model):
     _description = "Hospital Appointment"
     _rec_name = 'patient_id'
 
-    patient_id = fields.Many2one(comodel_name='hospital.patient', string="Patient",ondelete='cascade') #ondelete='restrict'
+    patient_id = fields.Many2one(comodel_name='hospital.patient', string="Patient",
+                                 ondelete='cascade')  # ondelete='restrict'
     gender = fields.Selection(related='patient_id.gender', readonly=False)
     appointment_time = fields.Datetime(string='Appointment Time', default=fields.Datetime.now)
     booking_date = fields.Date(string='Booking Date', default=fields.Date.context_today)
@@ -27,6 +28,20 @@ class HospitalAppointment(models.Model):
     doctor_id = fields.Many2one('res.users', string='Doctor', tracking=True)
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines', 'appointment_id', string='Pharmacy Lines')
     hide_sales_price = fields.Boolean(string='Hide Sale Price')
+    progress = fields.Integer(string="Progress", compute="_compute_progress")
+
+    @api.depends('state')
+    def _compute_progress(self):
+        for rec in self:
+            if rec.state == 'draft':
+                progress = 25
+            elif rec.state == 'in_consultation':
+                progress = 50
+            elif rec.state == 'done':
+                progress = 100
+            else:
+                progress = 0
+            rec.progress = progress
 
     @api.onchange('patient_id')
     def onchange_patient_id(self):
@@ -64,7 +79,7 @@ class HospitalAppointment(models.Model):
     def unlink(self):
         if self.state != 'draft':
             raise ValidationError(_("You can delete appointment only in  status 'Draft'."))
-        return super(HospitalAppointment,self).unlink()
+        return super(HospitalAppointment, self).unlink()
 
 
 class AppointmentPharmacyLines(models.Model):

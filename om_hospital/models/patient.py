@@ -29,6 +29,7 @@ class HospitalPatient(models.Model):
     marital_status = fields.Selection([('married', 'Married'), ('single', 'Single')], string="Marital Status",
                                       tracking=True)
     partner_name = fields.Char(string="Partner Name")
+    is_birthday = fields.Boolean(string="Birthday ?", compute='_compute_is_birthday')
 
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
@@ -76,9 +77,9 @@ class HospitalPatient(models.Model):
 
     def _search_age(self, operator, value):
         date_of_birth = date.today() - relativedelta.relativedelta(years=value)
-        start_of_year = date_of_birth.replace(day=1,month=1)
-        end_of_year = date_of_birth.replace(day=31,month=12)
-        return [('date_of_birth', '>=', start_of_year),('date_of_birth', '<=', end_of_year)]
+        start_of_year = date_of_birth.replace(day=1, month=1)
+        end_of_year = date_of_birth.replace(day=31, month=12)
+        return [('date_of_birth', '>=', start_of_year), ('date_of_birth', '<=', end_of_year)]
 
     def name_get(self):
         # patient_list = []
@@ -91,3 +92,13 @@ class HospitalPatient(models.Model):
 
     def action_test(self):
         print("Click")
+
+    @api.depends('date_of_birth')
+    def _compute_is_birthday(self):
+        for rec in self:
+            is_birthday = False
+            if rec.date_of_birth:
+                today = date.today()
+                if today.day == rec.date_of_birth.day and today.month == rec.date_of_birth.month:
+                    is_birthday = True
+            rec.is_birthday = is_birthday

@@ -36,8 +36,10 @@ class HospitalPatient(models.Model):
 
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
-        appointment_group = self.env['hospital.appointment'].read_group(domain=[('state','=','done')], fields=['patient_id'],
-                                                                        groupby=['patient_id'])  # .search_count([('patient_id', '=', rec.id)])
+        appointment_group = self.env['hospital.appointment'].read_group(domain=[],
+                                                                        fields=['patient_id'],
+                                                                        groupby=[
+                                                                            'patient_id'])  # .search_count([('patient_id', '=', rec.id)])
         for appointment in appointment_group:
             patient_id = appointment.get('patient_id')[0]
             patient_rec = self.browse(patient_id)
@@ -111,3 +113,14 @@ class HospitalPatient(models.Model):
                 if today.day == rec.date_of_birth.day and today.month == rec.date_of_birth.month:
                     is_birthday = True
             rec.is_birthday = is_birthday
+
+    def action_view_appointments(self):
+        return {
+            'name': _('Appointment'),
+            'res_model': 'hospital.appointment',
+            'view_mode': 'list,form,calendar,activity',
+            'context': {'default_patient_id':self.id},
+            'domain': [('patient_id', '=', self.id)],
+            'target': 'current',
+            'type': 'ir.actions.act_window'
+        }

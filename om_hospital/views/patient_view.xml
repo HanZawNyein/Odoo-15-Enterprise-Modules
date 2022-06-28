@@ -49,8 +49,17 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="alert alert-danger text-center o_form_header" role="alert" attrs="{'invisible':[('is_birthday','=',False)]}">
-                        <a class="close" data-dismiss="alert" href="#" aria-label="Close"><i title="Close" class="small fa fa-times"/></a>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_view_appointments"
+                                type="object" icon="fa-star">
+                            <field string="Appointments" name="appointment_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger text-center o_form_header" role="alert"
+                         attrs="{'invisible':[('is_birthday','=',False)]}">
+                        <a class="close" data-dismiss="alert" href="#" aria-label="Close">
+                            <i title="Close" class="small fa fa-times"/>
+                        </a>
                         <div>
                             <strong>Today is birthday !.</strong>
                         </div>
@@ -74,7 +83,7 @@
                             <field name="date_of_birth"/>
                             <field name="age"/>
                             <!--                            <field name="appointment_id"/>-->
-                            <field name="appointment_count"/>
+<!--                            <field name="appointment_count"/>-->
                             <field name="is_birthday" invisible="1"/>
                         </group>
                         <group>

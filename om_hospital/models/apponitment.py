@@ -29,6 +29,7 @@ class HospitalAppointment(models.Model):
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines', 'appointment_id', string='Pharmacy Lines')
     hide_sales_price = fields.Boolean(string='Hide Sale Price')
     progress = fields.Integer(string="Progress", compute="_compute_progress")
+    duration = fields.Float(string="Duration")
 
     @api.depends('state')
     def _compute_progress(self):

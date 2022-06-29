@@ -30,7 +30,7 @@ class HospitalAppointment(models.Model):
     hide_sales_price = fields.Boolean(string='Hide Sale Price')
     progress = fields.Integer(string="Progress", compute="_compute_progress")
     duration = fields.Float(string="Duration")
-    company_id = fields.Many2one('res.company',string='Company',default=lambda self:self.env.company)
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     currency_id = fields.Many2one('res.currency', related='company_id.currency_id')
 
     @api.depends('state')
@@ -52,12 +52,18 @@ class HospitalAppointment(models.Model):
 
     def action_testing(self):
         # print("Button CLicked")
+        # return {
+        #     'effect': {
+        #         'fadeout': 'slow',
+        #         'message': "click success",
+        #         'type': 'rainbow_man'
+        #     }
+        # }
+        # url action
         return {
-            'effect': {
-                'fadeout': 'slow',
-                'message': "click success",
-                'type': 'rainbow_man'
-            }
+            'type': 'ir.actions.act_url',
+            'target':'new',
+            'url': 'https://mail.google.com/'
         }
 
     def action_in_consultation(self):

@@ -62,7 +62,7 @@
                 </header>
                 <field name="patient_id"/>
                 <field name="ref"/>
-                <field name="gender" optional="show"/>
+                <field name="gender" optional="show" decoration-it="1" decoration-bf="1" decoration-success="gender == 'female'"/>
                 <field name="doctor_id" widget="many2one_avatar_user" optional="show"/>
                 <field name="booking_date" optional="show"/>
                 <field name="appointment_time" optional="hide"/>
@@ -79,6 +79,7 @@
                     <button name="action_test" string="CLick Me" type="object" class="oe_highlight"/>
                     <button name="edit" string="Edit" type="edit"/>
                 </groupby>
+                <field name="currency_id" invisible="1"/>
                 <field name="progress" widget="progressbar"/>
             </tree>
         </field>
@@ -159,7 +160,7 @@
                                                attrs="{'column_invisible':[('parent.hide_sales_price','=',True)]}"/>
                                         <field name="qty"/>
                                         <field name="currency_id" invisible="1"/>
-                                        <field name="price_subtotal"/>
+                                        <field name="price_subtotal" decoration-bf="1"/>
                                     </tree>
                                     <form>
                                         <group>

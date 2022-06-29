@@ -98,6 +98,8 @@
                     <button name="action_done" string="Mark As Done" type="object"
                             data-hotkey="v"
                             states="in_consultation" class="oe_highlight"/>
+                    <button name="action_whatsapp" string="Share in whatsapp" type="object"
+                            data-hotkey="w" class="oe_highlight" icon="fa-whatsapp"/>
                     <button name="%(om_hospital.action_cancel_appointment)d" string="Cancel" type="action"
                             data-hotkey="z" context="{'default_appointment_id':active_id}"
                             states="draft,in_consultation"/>

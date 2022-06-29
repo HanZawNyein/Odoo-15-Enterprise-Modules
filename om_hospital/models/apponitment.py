@@ -50,6 +50,18 @@ class HospitalAppointment(models.Model):
     def onchange_patient_id(self):
         self.ref = self.patient_id.ref
 
+    def action_whatsapp(self):
+        if not self.patient_id.phone:
+            raise ValidationError(_("Missing number in this patient record."))
+        message = 'Hi %s,' % self.patient_id.name
+        whatsapp_api_url = 'https://api.whatsapp.com/send?phone=%s&text=%s' % (self.patient_id.phone,message)
+
+        return{
+            'type':'ir.actions.act_url',
+            'target':'new',
+            'url':whatsapp_api_url
+        }
+
     def action_testing(self):
         # print("Button CLicked")
         # return {

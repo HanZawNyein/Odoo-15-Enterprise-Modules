@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding='utf-8' ?>
 <odoo>
 
-        <record id="view_hospital_appointment_calendar" model="ir.ui.view">
+    <record id="view_hospital_appointment_calendar" model="ir.ui.view">
         <field name="name">hospital.appointment.calendar</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <calendar string="Appointments" date_start="booking_date" mode="month" date_delay="duration"
-            color="patient_id" quick_add="False" hide_time="True" event_open_popup="True"
+                      color="patient_id" quick_add="False" hide_time="True" event_open_popup="True"
                       form_view_id="%(om_hospital.view_hospital_appointment_form)d" event_limit="5">
                 <field name="patient_id" filters="1" avatar_field="image"/>
-                <field name="state" invisible="1" filters="1" />
+                <field name="state" invisible="1" filters="1"/>
             </calendar>
         </field>
     </record>
@@ -22,8 +22,8 @@
         <field name="state">code</field>
         <field name="code">
             for rec in records:
-             if record.state == 'in_consultation':
-               record.action_done()
+                if record.state == 'in_consultation':
+                    record.action_done()
         </field>
     </record>
 
@@ -124,6 +124,8 @@
                             <field name="duration"/>
                         </group>
                         <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
                             <field name="hide_sales_price" groups="base.group_no_one"/>
                             <field name="appointment_time"/>
                             <button name="action_testing" type="object" string="Object Button" class="oe_highlight"
@@ -136,9 +138,9 @@
                     </group>
                     <notebook>
                         <page string="Progress" name="progress">
-<!--                            <field name="progress" widget="progressbar"/>-->
-<!--                            <field name="progress" widget="gauge"-->
-<!--                            options="{'style':'width:100px; height:100px;'}"/>-->
+                            <!--                            <field name="progress" widget="progressbar"/>-->
+                            <!--                            <field name="progress" widget="gauge"-->
+                            <!--                            options="{'style':'width:100px; height:100px;'}"/>-->
                             <field name="progress" widget="percentpie"/>
                         </page>
                         <page string="Prescription" name="prescription">
@@ -156,11 +158,14 @@
                                         <field name="price_unit"
                                                attrs="{'column_invisible':[('parent.hide_sales_price','=',True)]}"/>
                                         <field name="qty"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="price_subtotal"/>
                                     </tree>
                                     <form>
                                         <group>
                                             <field name="product_id"/>
-                                            <field name="price_unit"
+                                            <field name="price_unit" widget="monetary"
+                                                   options="{'currency_field':'currency_id'}"
                                                    attrs="{'column_invisible':[('parent.hide_sales_price','=',True)]}"/>
                                             <field name="qty"/>
                                         </group>

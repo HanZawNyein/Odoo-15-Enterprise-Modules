@@ -11,7 +11,7 @@ class HospitalPatient(models.Model):
     _description = "Hospital Patient"
     _order = 'id desc'
 
-    name = fields.Char(string='Name', tracking=True)
+    name = fields.Char(string='Name', tracking=True,trim=False)
     date_of_birth = fields.Date(string='Date of Birth', )
     age = fields.Integer(string='Age', compute='_compute_age', inverse='_inverse_compute_age', search='_search_age',
                          tracking=True)
